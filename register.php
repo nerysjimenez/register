@@ -15,12 +15,13 @@
 		echo "Guest already exist";
 	else
 	{
-			$SQLstring = "INSERT INTO guest_registration VALUES(" .
+		$SQLstring = "INSERT INTO guest_registration VALUES(" .
               $id . ",'" . $title . "','" . $fname .
               "'," . $lname . ",'" . $sex . ",'" . $comments .
               "');";  
 	
-	echo "Registration successful";
+		mysql_query($SQLstring);
+		echo "Registration successful";
 	}
 
     mysqli_close($con);
