@@ -1,6 +1,6 @@
 <?php
-    $con = mysqli_connect("localhost","guest_registration","", "guest_registration") or
-       die("Failed to connect to database " . mysqli_error());
+    $con = mysql_connect("localhost","guest_registration","", "guest_registration") or
+       die("Failed to connect to database " . mysql_error());
        	
 	$fname = $_POST["fname"];
 	$lname = $_POST["lname"];
@@ -20,9 +20,11 @@
               "'," . $lname . ",'" . $sex . ",'" . $comments .
               "');";  
 	
-		mysql_query($SQLstring);
-		echo "Registration successful";
+		if($result = mysql_query($SQLstring) && mysql_num_rows($result) > 0)
+			echo "Registration successful";
+		else 
+			echo "There was an error inserting the data";
 	}
 
-    mysqli_close($con);
+    mysql_close($con);
 ?>
