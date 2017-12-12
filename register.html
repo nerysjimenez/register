@@ -1,0 +1,93 @@
+﻿<html>
+<head>
+<title>Guest Registration</title>
+<script src="jquery-1.11.1.js"></script>
+<script>
+function validate()
+{
+	var id = document.getElementById("id").value;
+	var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var obj = document.getElementById("sex").getElementsByTagName("input");
+		
+	//validates id, firstname, lastname
+	if((!id.match(/\S/) ||!fname.match(/\S/) || !lname.match(/\S/)))
+	{
+		alert("ID, first name and last name must be filled out");
+		return;
+	}
+	
+	//id must be a number
+	else if(isNaN(id))
+	{
+	  alert("ID must be a number");
+	  return;
+	}
+	//validates sex radio boxes
+	else if((!obj[0].checked && !obj[1].checked))
+	{	
+		alert("Check your sex");
+		return;
+	}
+
+	    
+	else
+	{
+        $.post("register.php", {fname:$('#fname').val(), lname:$('#lname').val(),
+                          id:$('#id').val(), comments:$('#comments').val(),
+                          sex:$('#sex').val(), title:$('#title').val()},
+            );
+	}
+}
+function reset()
+{
+	//resets text fields
+	document.getElementById("id").innerHTML = "";
+	document.getElementById("fname").innerHTML = "";
+	document.getElementById("lname").innerHTML = "";
+	document.getElementById("comments").innerHTML = "";
+	
+	//resets radio
+	document.getElementById("sex").checked = false;
+	
+	//resets dropdown
+	var e = document.getElementsByTagName('select');
+	for (var i = 0; i < e.length; i++)
+	{
+	    e[i].selectedIndex = 0;
+	}
+}
+</script>
+</head>
+
+<body>
+<form>
+<p> ID <input type="text" id="id" maxlength="7"></p>
+<p>First Name <input type="text" id="fname"></p>
+<p>Last Name <input type="text" id="lname"></p>
+
+<p>Title </p>
+<select id="title">
+  <option value="mr">Mr</option>
+  <option value="ms">Ms</option>
+  <option value="mrs">Mrs</option>
+  <option value="miss">Miss</option>
+</select>
+
+<p>Sex</p>
+<div id="sex">
+<input type="radio" id="male" value="M">M
+<input type="radio" id="female" value="F">F
+</div>
+
+<p>Comments</p>
+<textarea rows="5" cols="30" id="comments">
+</textarea>
+<br>
+<br>
+<button type="button" onclick="validate()">Submit</button>
+<button type="button" onclick="reset()">Reset</button>
+</form>
+
+</body>
+</html>
