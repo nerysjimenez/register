@@ -2,7 +2,7 @@
 Guest Registration Application
 
     Nerys Jimenez 
-    Programming Assignment for the Programmer position at Royal Caribbean
+    Programming Assignment for the Programmer position
     
     Create a HTML form with the following fields: 
     - Text Fields for Personal Identification, First Name and Last Name 
